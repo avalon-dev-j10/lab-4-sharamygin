@@ -1,9 +1,15 @@
 package ru.avalon.java.dev.j10.labs;
 
 import java.util.Comparator;
+import java.util.Random;
+import ru.avalon.java.dev.j10.labs.randomizers.RandomDate;
+import ru.avalon.java.dev.j10.labs.randomizers.RandomPersona;
+import ru.avalon.java.dev.j10.labs.randomizers.RandomString;
+import static ru.avalon.java.dev.j10.labs.randomizers.RandomString.getStr;
+import ru.avalon.java.dev.j10.labs.sort.SortClass;
 
 public class Main {
-
+    
     public static void main(String[] args) {
         /*
          * TODO(Студент): Проинициализируйте массив strings
@@ -12,8 +18,14 @@ public class Main {
          * чтобы он содержал 20 строк, расположенных не
          * по порядку.
          */
-	    String[] strings = null;
-
+            
+	    String[] strings = new String[20];
+            for(int i=0; i<strings.length; i++){
+            strings[i] = getStr();
+            }
+            System.out.println("Сгенерированные пароли в случайном порядке:");
+            RandomString.dispRandString(strings);
+            
 	    /*
 	     * TODO(Студент): Проинициализируйте массив persons
 	     *
@@ -22,8 +34,13 @@ public class Main {
 	     * 2. Проинициализируйте массив persons 20
 	     *    экземплярыми созданного класса.
 	     */
-	    Person[] persons = null;
-
+	    Person[] persons = new Persona[20];
+            for (int i=0; i < persons.length; i++) {
+            persons[i] = new RandomPersona().getPersona();
+            }
+            System.out.println("Персонажи в случайном порядке:");
+            RandomPersona.dispRandPersona(persons);
+ 
         /*
          * TODO(Студент): Проинициализируйте переменную sort
          *
@@ -32,7 +49,7 @@ public class Main {
          * 2. Проинициализируйте переменную sort экземпляром
          *    созданного класса.
          */
-        Sort sort = null;
+        Sort sort = new SortClass();
 
         /*
          * TODO(Студент): Проинициализируйте переменную comparator
@@ -44,8 +61,7 @@ public class Main {
          * 2. Проинициализируйте переменную comparator
          *    экземпляром созданного класса.
          */
-        Comparator comparator = null;
-
+        Comparator comparator = new MyComparator.Reverse();
         /*
          * TODO(Студент): Отсортируйте массив persons по возрастанию
          *
@@ -57,7 +73,8 @@ public class Main {
          *    что массив отсортирован по возрастанию.
          */
         sort.sort(persons);
-
+        System.out.println("Сортировка персонажей:");
+        RandomPersona.dispRandPersona(persons);
         /*
          * TODO(Студент): Отсортируйте массив strings по возрастанию
          *
@@ -69,7 +86,8 @@ public class Main {
          *    что массив отсортирован по возрастанию.
          */
         sort.sort(strings);
-
+        System.out.println("Сортированные пароли:");
+        RandomString.dispRandString(strings);
         /*
          * TODO(Студент): Отсортируйте массив strings по убыванию
          *
@@ -80,5 +98,7 @@ public class Main {
          *    что массив отсортирован по убыванию.
          */
         sort.sort(strings, comparator);
+        System.out.println("Обратная сортировка паролей:");
+        RandomString.dispRandString(strings);
     }
 }
